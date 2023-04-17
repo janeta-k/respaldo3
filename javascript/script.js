@@ -1,8 +1,3 @@
-/*
-Preguntar el lunes:
-- a quién le puedo pedir ayuda si tengo errores en el codigo que no puedo encontrar
- */
-
 class Producto {
     constructor(id, nombre, precio, stock, img) {
         this.id = id;
@@ -128,6 +123,12 @@ const controladorCarrito = new CarritoController();
 controladorCarrito.verificarExistenciaEnStorage();
 controladorProductos.mostrarEnDOM();
 
+function mostrarCarrito() { 
+    controladorCarrito.mostrarEnDom()
+    controladorCarrito.precioTotal()
+    controladorCarrito.guardarEnStorage()
+}
+
 function agregarAlCarrito(id) {
     let producto = controladorProductos.listaProductos.find(producto => producto.id == id);
     console.log(producto)
@@ -144,35 +145,24 @@ function agregarAlCarrito(id) {
     
 }
 
-function mostrarCarrito() { //??????? se repite mucho, intenta reemplazar
-    controladorCarrito.guardarEnStorage()
-    controladorCarrito.mostrarEnDom()
-    controladorCarrito.precioTotal()
-}
-
 
 function incrementarCantidad(id) {
     let producto = controladorCarrito.listaCarrito.find(producto => producto.id == id)
 
     producto.cantidad++
-    controladorCarrito.mostrarEnDom()
-
-    controladorCarrito.precioTotal()
-    controladorCarrito.guardarEnStorage()
+    mostrarCarrito()
 }
 
 function disminuirCantidad(id) {
     let producto = controladorCarrito.listaCarrito.find(producto => producto.id == id)
 
     producto.cantidad--
-    controladorCarrito.mostrarEnDom()
-
-    controladorCarrito.precioTotal()
 
     if (producto.cantidad == 0) {
         quitarProducto(id)
     }
-    controladorCarrito.guardarEnStorage()
+
+    mostrarCarrito()
 }
 
 function quitarProducto(id) {
@@ -182,29 +172,6 @@ function quitarProducto(id) {
     let indice = controladorCarrito.listaCarrito.findIndex(producto => producto.id == id);
     controladorCarrito.listaCarrito.splice(indice, 1);
 
-    controladorCarrito.mostrarEnDom()
-    controladorCarrito.precioTotal()
-    controladorCarrito.guardarEnStorage()
+    mostrarCarrito()
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//CREO QUE YA SÉ LO QUE PODRÍA FUNCIONARRRRRRRR
-//intenta hacer el onclick y eso, averigua bien, o busca en youtube jiji, y bueno, recuerda más que nada 
-//ejecutar siempre lo de guardad en storage. Pro ejemplo, tenías el metodo de aumentar cantidad en la clase, 
-//puede que funcione si buscar como hacer que funcione el onclick en los canales de youtube donde hacen carritos
-// y luego llamas la funcion del local storage
-//RECUERDAAAAAAAAAA
-//RECUERDA pregunta si hacer funciones fuera de las clases, es decir, hacer funciones en vez de métodos afecta en la nota final xd
-//También recuerda sacar estas notas y subir el codigo a github por si te lo piden nais
